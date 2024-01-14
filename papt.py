@@ -78,18 +78,18 @@ def set_startup_apps():
     if program_name.lower() == 'exit':
         return
 
-    enable_disable = input(f"Do you want to enable or disable {program_name} on startup? (enable/disable): ").lower()
+    enable_disable = input(f"Do you want to enable or disable {program_name} on startup? (1 for enable, 2 for disable): ")
 
-    if enable_disable == 'enable':
+    if enable_disable == '1':
         run_command(f"sudo systemctl enable {program_name}.service")
         print(f"{program_name} is now set to run on startup.")
-    elif enable_disable == 'disable':
+    elif enable_disable == '2':
         run_command(f"sudo systemctl disable {program_name}.service")
         print(f"{program_name} is now unset from running on startup.")
     else:
-        print("Invalid choice. Please enter 'enable' or 'disable'.")
+        print("Invalid choice. Please enter '1' for enable or '2' for disable.")
 
-def edit_xdg_environment_path():
+def edit_xdg_config_file():
     run_command("nano $XDG_CONFIG_HOME/environment")
 
 def main():
@@ -106,7 +106,7 @@ def main():
         print("9. Collect system logs")
         print("10. Fix common Debian issues")
         print("11. Set system startup apps")
-        print("12. Edit XDG environment path")
+        print("12. Edit XDG config file")
         print("13. Exit")
 
         choice = input("Enter your choice (1-13): ")
@@ -138,7 +138,7 @@ def main():
         elif choice == '11':
             set_startup_apps()
         elif choice == '12':
-            edit_xdg_environment_path()
+            edit_xdg_config_file()
         elif choice == '13':
             print("Exiting the program. Goodbye!")
             break
